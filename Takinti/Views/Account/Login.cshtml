@@ -4,59 +4,111 @@
     ViewBag.Title = "Log in";
 }
 
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+<!-- Start Bradcaump area -->
+<div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(/images/bg/2.jpg) no-repeat scroll center center / cover ;">
+    <div class="ht__bradcaump__wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="bradcaump__inner text-center">
+                        <h2 class="bradcaump-title">login & Register</h2>
+                        <nav class="bradcaump-inner">
+                            <a class="breadcrumb-item" href="index.html">Home</a>
+                            <span class="brd-separetor">/</span>
+                            <span class="breadcrumb-item active">login & Register</span>
+                        </nav>
                     </div>
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
-                    </div>
-                </div>
-                <p>
-                    @Html.ActionLink("Register as a new user", "Register")
-                </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
-            }
-        </section>
-    </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
+            </div>
+        </div>
     </div>
 </div>
+<!-- End Bradcaump area -->
+<!-- Start Login Register Area -->
+<div class="htc__login__register bg__white ptb--130">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <ul class="login__register__menu" role="tablist">
+                    <li role="presentation" class="login active"><a href="#login" role="tab" data-toggle="tab">Login</a></li>
+                    <li role="presentation" class="register"><a href="#register" role="tab" data-toggle="tab">Register</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- Start Login Register Content -->
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="htc__login__register__wrap">
+                    <!-- Start Single Content -->
+                    <div id="login" role="tabpanel" class="single__tabs__panel tab-pane fade in active">
+                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login", @id="loginForm" }))
+    {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(m => m.Email, new { @placeholder = "E-posta*" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+                    @Html.PasswordFor(m => m.Password, new { @placeholder = "Parola" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+                        <div class="tabs__checkbox">
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.LabelFor(m => m.RememberMe)
+                            <span class="forget"><a href="@Url.Action("ForgetPassword","Account")">Şifrenizi mi unuttunuz?</a></span>
+                        </div>
+                    <div class="htc__login__btn mt--30">
+                        <a href="javascript:void(0)l;" onclick="document.getElementById('loginForm').submit();">Giriş</a>
+                    </div>
+}
+                    <div class="htc__social__connect">
+                        <h2>Veya sosyal medyayla giriş yapın</h2>
+                        @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                        <ul class="htc__soaial__list">
+                            <li><a class="bg--twitter" href="#"><i class="zmdi zmdi-twitter"></i></a></li>
+
+                            <li><a class="bg--instagram" href="#"><i class="zmdi zmdi-instagram"></i></a></li>
+
+                            <li><a class="bg--facebook" href="#"><i class="zmdi zmdi-facebook"></i></a></li>
+
+                            <li><a class="bg--googleplus" href="#"><i class="zmdi zmdi-google-plus"></i></a></li>
+                        </ul>
+                    </div>
+                    </div>
+                    <!-- End Single Content -->
+                    <!-- Start Single Content -->
+                    <div id="register" role="tabpanel" class="single__tabs__panel tab-pane fade">
+                        <form class="login" method="post">
+                            <input type="text" placeholder="Name*">
+                            <input type="email" placeholder="Email*">
+                            <input type="password" placeholder="Password*">
+                        </form>
+                        <div class="tabs__checkbox">
+                            <input type="checkbox">
+                            <span> Remember me</span>
+                        </div>
+                        <div class="htc__login__btn">
+                            <a href="#">register</a>
+                        </div>
+                        <div class="htc__social__connect">
+                            <h2>Or Login With</h2>
+                            <ul class="htc__soaial__list">
+                                <li><a class="bg--twitter" href="#"><i class="zmdi zmdi-twitter"></i></a></li>
+                                <li><a class="bg--instagram" href="#"><i class="zmdi zmdi-instagram"></i></a></li>
+                                <li><a class="bg--facebook" href="#"><i class="zmdi zmdi-facebook"></i></a></li>
+                                <li><a class="bg--googleplus" href="#"><i class="zmdi zmdi-google-plus"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- End Single Content -->
+                </div>
+            </div>
+        </div>
+        <!-- End Login Register Content -->
+    </div>
+</div>
+<!-- End Login Register Area -->
+@****************************************************************@
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
