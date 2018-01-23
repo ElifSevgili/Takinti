@@ -8,7 +8,11 @@ using System.Web;
 namespace Takinti.Models
 {
     public class Category
-    {
+    {  
+        public Category()
+        {
+            ChildCategories = new HashSet<Category>();
+        }
         public int Id { get; set; }
         [Required]
         [StringLength(200)]
@@ -25,6 +29,7 @@ namespace Takinti.Models
         public int? ParentCategoryId { get; set; }
         [ForeignKey("ParentCategoryId")]
         public virtual Category ParentCategory { get; set; }
+        public virtual ICollection<Category> ChildCategories { get; set; }
         public virtual ICollection<Product> Products {get;set;}
 
        

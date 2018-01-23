@@ -1,0 +1,57 @@
+﻿@model Takinti.Models.Product
+@{ Layout = null;}   
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Kapat"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-product">
+                    <!-- Start product images -->
+                    <div class="product-images">
+                        <div class="main-image images">
+                            <img alt="@Model.Name" src="/images/product/@Model.Photo" width="600" height="600">
+                        </div>
+                    </div>
+                    <!-- end product images -->
+                    <div class="product-info">
+                        <h1>@Model.Name</h1>
+                        <div class="rating__and__review">
+                            <ul class="rating">
+                                <li><span class="ti-star"></span></li>
+                                <li><span class="ti-star"></span></li>
+                                <li><span class="ti-star"></span></li>
+                                <li><span class="ti-star"></span></li>
+                                <li><span class="ti-star"></span></li>
+                            </ul>
+                            <div class="review">
+                                <a href="#">4 müşteri görüşü</a>
+                            </div>
+                        </div>
+                        <div class="price-box-3">
+                            <div class="s-price-box">
+                                <span class="new-price">@(Model.Price)₺</span>
+                                <span class="old-price">@(Model.OldPrice)₺</span>
+                            </div>
+                        </div>
+                        <div class="quick-desc">
+                          @Html.Raw(Model.Description)
+                        </div>
+                        
+                        <div class="social-sharing">
+                            <div class="widget widget_socialsharing_widget">
+                                <h3 class="widget-title-modal">Bu ürünü paylaş</h3>
+                                <ul class="social-icons">
+                                    <li><a target="_blank" title="rss" href="#" class="rss social-icon"><i class="zmdi zmdi-rss"></i></a></li>
+                                    <li><a target="_blank" title="Linkedin" href="#" class="linkedin social-icon"><i class="zmdi zmdi-linkedin"></i></a></li>
+                                    <li><a target="_blank" title="Pinterest" href="#" class="pinterest social-icon"><i class="zmdi zmdi-pinterest"></i></a></li>
+                                    <li><a target="_blank" title="Tumblr" href="#" class="tumblr social-icon"><i class="zmdi zmdi-tumblr"></i></a></li>
+                                    <li><a target="_blank" title="Pinterest" href="#" class="pinterest social-icon"><i class="zmdi zmdi-pinterest"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="addtocart-btn">
+                            <a href="javascript:void(0);" onclick="AddToCart('@Model.Slug','#productModal')">Sepete Ekle</a>
+                        </div>
+                    </div><!-- .product-info -->
+                </div><!-- .modal-product -->
+            </div><!-- .modal-body -->
+        
