@@ -1,0 +1,30 @@
+﻿@{Layout = null;}
+
+<div class="shp__cart__wrap">
+    @if (Session["Cart"] != null)
+    {
+        foreach (var cartItem in ((Takinti.Models.Cart)Session["Cart"]).CartItems)
+        {
+            <div class="shp__single__product">
+                <div class="shp__pro__thumb">
+                    <a href="@Url.Action("Index","Product",new { slug=cartItem.Product.Slug})">
+                        <img src="/images/product/@cartItem.Product.Photo" alt="@cartItem.Product.Name">
+                    </a>
+                </div>
+                <div class="shp__pro__details">
+                    <h2><a href="@Url.Action("Index","Product",new { slug=cartItem.Product.Slug})">@cartItem.Product.Name</a></h2>
+                    <span class="quantity">Adet: @cartItem.Quantity</span>
+                    <span class="shp__price">@cartItem.TotalPrice</span>
+                </div>
+                <div class="remove__btn">
+                    <a href="javascript:void(0);" onclick="RemoveFromCart('@cartItem.Product.Slug')" title="Remove this item"><i class="zmdi zmdi-close"></i></a>
+                </div>
+            </div>
+        }
+    }
+
+</div>
+<ul class="shoping__total">
+    <li class="subtotal">Toplam:</li>
+    <li class="total__price">@(Session["Cart"] != null ? ((Takinti.Models.Cart)Session["Cart"]).TotalPrice : 0)₺</li>
+</ul>

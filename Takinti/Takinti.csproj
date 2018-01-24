@@ -568,6 +568,7 @@
     <Content Include="Views\Shop\Cart.cshtml" />
     <Content Include="Views\Shop\Checkout.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
+    <Content Include="Views\Shop\LayoutCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

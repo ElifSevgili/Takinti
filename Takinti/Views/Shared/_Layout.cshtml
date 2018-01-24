@@ -55,24 +55,24 @@
                             <nav class="mainmenu__nav hidden-xs hidden-sm">
                                 <ul class="main__menu">
                                     <li class="drop">
-                                        <a href="@Url.Action("Index","Home")">Anasayfa</a>
+                                        <a href="@Url.Action("Index", "Home")">Anasayfa</a>
 
                                     </li>
                                     <li>
-                                        <a href="@Url.Action("Index","Category",new { slug = "kolyeler" })">Kolyeler</a>
+                                        <a href="@Url.Action("Index", "Category", new { slug = "kolyeler" })">Kolyeler</a>
 
                                     </li>
                                     <li class="drop">
-                                        <a href="@Url.Action("Index","Category",new { slug = "kupeler" })">Küpeler</a>
+                                        <a href="@Url.Action("Index", "Category", new { slug = "kupeler" })">Küpeler</a>
                                     </li>
                                     <li class="drop">
-                                        <a href="@Url.Action("Index","Category",new { slug = "yuzukler" })">Yüzükler</a>
+                                        <a href="@Url.Action("Index", "Category", new { slug = "yuzukler" })">Yüzükler</a>
                                     </li>
                                     <li class="drop">
-                                        <a href="@Url.Action("Index","Blog")">Blog</a>
+                                        <a href="@Url.Action("Index", "Blog")">Blog</a>
                                     </li>
                                     <li class="drop">
-                                        <a href="@Url.Action("Contact","Home")">İletişim</a>
+                                        <a href="@Url.Action("Contact", "Home")">İletişim</a>
                                     </li>
                                  </ul>
                                    
@@ -81,24 +81,24 @@
                                 <nav id="mobile_dropdown">
                                     <ul>
                                         <li class="drop">
-                                            <a href="@Url.Action("Index","Home")">Anasayfa</a>
+                                            <a href="@Url.Action("Index", "Home")">Anasayfa</a>
 
                                         </li>
                                         <li>
-                                            <a href="@Url.Action("Index","Category",new { slug = "kolyeler" })">Kolyeler</a>
+                                            <a href="@Url.Action("Index", "Category", new { slug = "kolyeler" })">Kolyeler</a>
 
                                         </li>
                                         <li class="drop">
-                                            <a href="@Url.Action("Index","Category",new { slug = "kupeler" })">Küpeler</a>
+                                            <a href="@Url.Action("Index", "Category", new { slug = "kupeler" })">Küpeler</a>
                                         </li>
                                         <li class="drop">
-                                            <a href="@Url.Action("Index","Category",new { slug = "yuzukler" })">Yüzükler</a>
+                                            <a href="@Url.Action("Index", "Category", new { slug = "yuzukler" })">Yüzükler</a>
                                         </li>
                                         <li class="drop">
-                                            <a href="@Url.Action("Index","Blog")">Blog</a>
+                                            <a href="@Url.Action("Index", "Blog")">Blog</a>
                                         </li>
                                         <li class="drop">
-                                            <a href="@Url.Action("Contact","Home")">İletişim</a>
+                                            <a href="@Url.Action("Contact", "Home")">İletişim</a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -108,8 +108,8 @@
                         <div class="col-md-2 col-sm-4 col-xs-3">
                             <ul class="menu-extra">
                                 <li class="search search__open hidden-xs"><span class="ti-search"></span></li>
-                                <li><a href="@Url.Action("Login","Account")"><span class="ti-user"></span></a></li>
-                                <li id="shoppingCart" class="cart__menu"><span  class="ti-shopping-cart"></span>@if (Session["Cart"] != null && ((Takinti.Models.Cart)Session["Cart"]).ProductCount>0)
+                                <li><a href="@Url.Action("Login", "Account")"><span class="ti-user"></span></a></li>
+                                <li id="shoppingCart" class="cart__menu"><span  class="ti-shopping-cart"></span>@if (Session["Cart"] != null && ((Takinti.Models.Cart)Session["Cart"]).ProductCount > 0)
                                 {<span id="cartBadge" class="badge"
                                   style="background-color: red;font-size:xx-small;vertical-align:super;
                                  line-height:15px;color:white;font-weight:normal; height:20px;">@(((Takinti.Models.Cart)Session["Cart"]).ProductCount)</span>}
@@ -209,46 +209,42 @@
                     <div class="offsetmenu__close__btn">
                         <a href="#"><i class="zmdi zmdi-close"></i></a>
                     </div>
-                    <div class="shp__cart__wrap">
-                        <div class="shp__single__product">
-                            <div class="shp__pro__thumb">
-                                <a href="#">
-                                    <img src="/images/product/sm-img/1.jpg" alt="product images">
-                                </a>
-                            </div>
-                            <div class="shp__pro__details">
-                                <h2><a href="product-details.html">BO&Play Wireless Speaker</a></h2>
-                                <span class="quantity">QTY: 1</span>
-                                <span class="shp__price">$105.00</span>
-                            </div>
-                            <div class="remove__btn">
-                                <a href="#" title="Remove this item"><i class="zmdi zmdi-close"></i></a>
-                            </div>
+                    <div id="layoutShoppingCart">
+                       
+                        <div class="shp__cart__wrap">
+                            @if (Session["Cart"] != null)
+        {
+            foreach (var cartItem in ((Takinti.Models.Cart)Session["Cart"]).CartItems)
+            {
+                    <div class="shp__single__product">
+                        <div class="shp__pro__thumb">
+                            <a href="@Url.Action("Index","Product",new { slug=cartItem.Product.Slug})">
+                                <img src="/images/product/@cartItem.Product.Photo" alt="@cartItem.Product.Name">
+                            </a>
                         </div>
-                        <div class="shp__single__product">
-                            <div class="shp__pro__thumb">
-                                <a href="#">
-                                    <img src="/images/product/sm-img/2.jpg" alt="product images">
-                                </a>
-                            </div>
-                            <div class="shp__pro__details">
-                                <h2><a href="product-details.html">Brone Candle</a></h2>
-                                <span class="quantity">QTY: 1</span>
-                                <span class="shp__price">$25.00</span>
-                            </div>
-                            <div class="remove__btn">
-                                <a href="#" title="Remove this item"><i class="zmdi zmdi-close"></i></a>
-                            </div>
+                        <div class="shp__pro__details">
+                            <h2><a href="@Url.Action("Index","Product",new { slug=cartItem.Product.Slug})">@cartItem.Product.Name</a></h2>
+                            <span class="quantity">Adet: @cartItem.Quantity</span>
+                            <span class="shp__price">@cartItem.TotalPrice</span>
+                        </div>
+                        <div class="remove__btn">
+                            <a href="#" onclick="RemoveFromCart('@cartItem.Product.Slug')" title="Remove this item"><i class="zmdi zmdi-close"></i></a>
                         </div>
                     </div>
-                    <ul class="shoping__total">
-                        <li class="subtotal">Subtotal:</li>
-                        <li class="total__price">$130.00</li>
-                    </ul>
+}
+}
+
+                        </div>
+                        <ul class="shoping__total">
+                            <li class="subtotal">Toplam:</li>
+                            <li class="total__price">@(Session["Cart"] != null ? ((Takinti.Models.Cart)Session["Cart"]).TotalPrice : 0)₺</li>
+                        </ul>
+                    </div>
                     <ul class="shopping__btn">
                         <li><a href="@Url.Action("Cart","Shop")">Sepeti Göster</a></li>
                         <li class="shp__checkout"><a href="@Url.Action("Checkout","Shop")">Alışverişi Tamamla</a></li>
                     </ul>
+
                 </div>
             </div>
             <!-- End Cart Panel -->
@@ -406,8 +402,9 @@
     <script>
         function AddToCart(slug,closeModal) {
             $.post("/Shop/AddToCart", { slug: slug }, function (data) {
-                if (data > 0) {
+                if (data >0) {
                     UpdateBadge(data);
+                    UpdateCart();
                     if (closeModal) {
                         $(closeModal).modal("hide");
                     }
@@ -417,16 +414,37 @@
                 else {
                     alert("Bir hata oluştu,lütfen tekrar deneyiniz.");
                 }
+                
+            }).fail(function () {
+                alert("Beklenmeyen bir hata oluştu,lütfen tekrar deneyiniz.")
+                });
+
+        }
+        function RemoveFromCart(slug) {
+            $.post("/Shop/RemoveFromCart", { slug: slug }, function (data) {
+
+                UpdateBadge(data);
+                UpdateCart();
+            }).fail(function () {
+                alert("Beklenmeyen bir hata oluştu,lütfen tekrar deneyiniz.")
             });
         }
         function UpdateBadge(data) {
             if ($('#cartBadge').html() != null) {
                 $("#cartBadge").html(data);
             } else {
-                $("#shoppingCart").append('<span id= "cartBadge" class="badge" style="background-color: red;font-size:xx-small;vertical-align:super;line-height:15px;color:white;font-weight:normal; height:20px;">' + data + '</span>');
+                $("#shoppingCart").after('<span id= "cartBadge" class="badge" style="background-color: red;font-size:xx-small;vertical-align:super;line-height:15px;color:white;font-weight:normal; height:20px;">' + data + '</span>');
                              
                      
             }
+            if (data == 0) {
+                $("#cartBadge").remove();
+            }
+        }
+        function UpdateCart() {
+            $.post("/Shop/Cart", function (data) {
+                $("#layoutShoppingCart").html(data);
+            });
         }
     </script>
 @RenderSection("scripts",false)
