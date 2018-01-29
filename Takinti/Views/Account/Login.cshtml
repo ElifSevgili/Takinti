@@ -1,8 +1,12 @@
 ﻿@using Takinti.Models
 @model LoginViewModel
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = "Giriş";
 }
+
+
+
+
 
 <!-- Start Bradcaump area -->
 <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(/images/bg/2.jpg) no-repeat scroll center center / cover ;">
@@ -11,11 +15,11 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="bradcaump__inner text-center">
-                        <h2 class="bradcaump-title">login & Register</h2>
+                        <h2 class="bradcaump-title">Giriş Yap /Kayıt Ol</h2>
                         <nav class="bradcaump-inner">
-                            <a class="breadcrumb-item" href="index.html">Home</a>
+                            <a class="breadcrumb-item" href="index.html">Anasayfa</a>
                             <span class="brd-separetor">/</span>
-                            <span class="breadcrumb-item active">login & Register</span>
+                            <span class="breadcrumb-item active">Giriş Yap /Kayıt Ol</span>
                         </nav>
                     </div>
                 </div>
@@ -39,58 +43,60 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <div class="htc__login__register__wrap">
+                   
+
                     <!-- Start Single Content -->
                     <div id="login" role="tabpanel" class="single__tabs__panel tab-pane fade in active">
-                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login", @id="loginForm" }))
-    {
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.TextBoxFor(m => m.Email, new { @placeholder = "E-posta*" })
-                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login", @id = "loginForm" }))
+        {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.TextBoxFor(m => m.Email, new { @placeholder = "E-posta*" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
 
-                    @Html.PasswordFor(m => m.Password, new { @placeholder = "Parola" })
-                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                @Html.PasswordFor(m => m.Password, new { @placeholder = "Parola" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
 
-                        <div class="tabs__checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                            <span class="forget"><a href="@Url.Action("ForgetPassword","Account")">Şifrenizi mi unuttunuz?</a></span>
-                        </div>
-                    <div class="htc__login__btn mt--30">
-                        <a href="javascript:void(0)l;" onclick="document.getElementById('loginForm').submit();">Giriş</a>
-                    </div>
+                <div class="tabs__checkbox">
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                    @Html.LabelFor(m => m.RememberMe)
+                    <span class="forget"><a href="@Url.Action("ForgetPassword","Account")">Şifrenizi mi unuttunuz?</a></span>
+                </div>
+                <div class="htc__login__btn mt--30">
+                    <a href="javascript:void(0)l;" onclick="document.getElementById('loginForm').submit();">Giriş</a>
+                </div>
 }
-                    <div class="htc__social__connect">
-                        <h2>Veya sosyal medyayla giriş yapın</h2>
-                        @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-                        <ul class="htc__soaial__list">
-                            <li><a class="bg--twitter" href="#"><i class="zmdi zmdi-twitter"></i></a></li>
+                        <div class="htc__social__connect">
+                            <h2>Veya sosyal medyayla giriş yapın</h2>
+                            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                            <ul class="htc__soaial__list">
+                                <li><a class="bg--twitter" href="#"><i class="zmdi zmdi-twitter"></i></a></li>
 
-                            <li><a class="bg--instagram" href="#"><i class="zmdi zmdi-instagram"></i></a></li>
+                                <li><a class="bg--instagram" href="#"><i class="zmdi zmdi-instagram"></i></a></li>
 
-                            <li><a class="bg--facebook" href="#"><i class="zmdi zmdi-facebook"></i></a></li>
+                                <li><a class="bg--facebook" href="#"><i class="zmdi zmdi-facebook"></i></a></li>
 
-                            <li><a class="bg--googleplus" href="#"><i class="zmdi zmdi-google-plus"></i></a></li>
-                        </ul>
-                    </div>
+                                <li><a class="bg--googleplus" href="#"><i class="zmdi zmdi-google-plus"></i></a></li>
+                            </ul>
+                        </div>
                     </div>
                     <!-- End Single Content -->
                     <!-- Start Single Content -->
                     <div id="register" role="tabpanel" class="single__tabs__panel tab-pane fade">
-                        <form class="login" method="post">
-                            <input type="text" placeholder="Name*">
-                            <input type="email" placeholder="Email*">
-                            <input type="password" placeholder="Password*">
-                        </form>
-                        <div class="tabs__checkbox">
-                            <input type="checkbox">
-                            <span> Remember me</span>
+                        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "login",id="registerForm" }))
+                        {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    @Html.TextBox("Name", null, new { placeholder = "Ad Soyad*" })
+                    @Html.TextBox("Email", null, new { placeholder = "E-posta*" })
+                    @Html.Password("Password", null, new { placeholder = "Parola*" })
+                    @Html.Password("ConfirmPassword", null, new { placeholder = "Parola Doğrula*" })
+                     <div class="htc__login__btn">
+                            <a href="javascript:void(0);" onclick="document.getElementById('registerForm').submit();">Kayıt Ol</a>
                         </div>
-                        <div class="htc__login__btn">
-                            <a href="#">register</a>
-                        </div>
+                        }
                         <div class="htc__social__connect">
-                            <h2>Or Login With</h2>
+                            <h2>Veya sosyal medya ile giriş yap</h2>
                             <ul class="htc__soaial__list">
                                 <li><a class="bg--twitter" href="#"><i class="zmdi zmdi-twitter"></i></a></li>
                                 <li><a class="bg--instagram" href="#"><i class="zmdi zmdi-instagram"></i></a></li>

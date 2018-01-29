@@ -108,7 +108,15 @@
                         <div class="col-md-2 col-sm-4 col-xs-3">
                             <ul class="menu-extra">
                                 <li class="search search__open hidden-xs"><span class="ti-search"></span></li>
-                                <li><a href="@Url.Action("Login", "Account")"><span class="ti-user"></span></a></li>
+                                @if (Request.IsAuthenticated)
+                                {
+                                <li><a href="@Url.Action("Login", "Account")"><span class="ti-user"></span>&nbsp;Profilim</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="@Url.Action("Login", "Account")"><span class="ti-user"></span>&nbsp;Üyelik</a></li>
+                                }
+                                
                                 <li id="shoppingCart" class="cart__menu"><span  class="ti-shopping-cart"></span>@if (Session["Cart"] != null && ((Takinti.Models.Cart)Session["Cart"]).ProductCount > 0)
                                 {<span id="cartBadge" class="badge"
                                   style="background-color: red;font-size:xx-small;vertical-align:super;
@@ -421,6 +429,8 @@
 
         }
         function RemoveFromCart(slug) {
+            $("input[name='Quantity_" + slug + "']").val(0);
+            $("#cartForm").submit();
             $.post("/Shop/RemoveFromCart", { slug: slug }, function (data) {
 
                 UpdateBadge(data);
@@ -429,6 +439,9 @@
                 alert("Beklenmeyen bir hata oluştu,lütfen tekrar deneyiniz.")
             });
         }
+
+       
+
         function UpdateBadge(data) {
             if ($('#cartBadge').html() != null) {
                 $("#cartBadge").html(data);
@@ -445,6 +458,7 @@
             $.post("/Shop/Cart", function (data) {
                 $("#layoutShoppingCart").html(data);
             });
+           
         }
     </script>
 @RenderSection("scripts",false)

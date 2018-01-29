@@ -21,6 +21,37 @@ namespace Takinti.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Cart(FormCollection form)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                return View("LayoutCart");
+            }
+            if (Session["Cart"] == null)
+            {
+                Session["Cart"] = new Cart();
+            }
+            var cartItems = ((Cart)Session["Cart"]).CartItems.ToArray();
+            foreach (var cartItem in cartItems)
+            {
+                if (!String.IsNullOrEmpty(form["Quantity_" + cartItem.Product.Slug.ToLower()]))
+                {
+                    var sessionCartItem = ((Cart)Session["Cart"]).CartItems.FirstOrDefault(c => c.Product.Slug.ToLower() == cartItem.Product.Slug.ToLower());
+
+
+                    sessionCartItem.Quantity = Convert.ToInt32(form["Quantity_" + cartItem.Product.Slug.ToLower()]);
+
+                    if (sessionCartItem.Quantity <= 0)
+                    {
+                        ((Cart)Session["Cart"]).CartItems.Remove(sessionCartItem);
+                    }
+                }
+            }
+            return View();
+        }
+
+        [Authorize]
         public ActionResult Checkout()
         {
             return View();
@@ -90,5 +121,10 @@ namespace Takinti.Controllers
                 return Json(CartProductCount());
          
         }
+
+        
+
+
     }
+
 }
